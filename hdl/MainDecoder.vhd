@@ -194,8 +194,13 @@ signal WriteBR_wire2 : std_logic;
 signal WriteBR_wire3 : std_logic;
 signal WriteBR_wire4 : std_logic;
 signal WriteBR_wire5 : std_logic;
+
 signal WriteBR_wire6 : std_logic;
 signal WriteBR_wire7 : std_logic;
+signal WriteBR_wire8 : std_logic;
+signal WriteBR_wire9 : std_logic;
+signal WriteBR_wire10 : std_logic;
+signal WriteBR_wire11: std_logic;
 ----------------------------------------------------------
 
 -------------------Cables para amMux-------------
@@ -241,11 +246,7 @@ signal Enable_sumcon_wire3 : std_logic;
 
 
 ----------------------------------------------------------
-signal auxiliar : std_logic;
-signal auxiliar2 : std_logic;
-signal auxiliar3 : std_logic;
-signal auxiliar4 : std_logic;
-signal auxiliar5 : std_logic;
+
 --------------Entradas y salida de cada Flip Flop de la One HOT----------------
 signal DEntradaEstado0: std_logic;
 signal DEntradaEstado1: std_logic;
@@ -319,6 +320,14 @@ signal DEntradaEstado62: std_logic;
 signal DEntradaEstado63: std_logic;
 signal DEntradaEstado64: std_logic;
 
+-------FF Extra tiempos
+signal DEntradaEstado65: std_logic;
+signal DEntradaEstado66: std_logic;
+signal DEntradaEstado67: std_logic;
+signal DEntradaEstado68: std_logic;
+
+
+
 signal QSalidaEstado0: std_logic;
 signal QSalidaEstado1: std_logic;
 signal QSalidaEstado2: std_logic;
@@ -391,6 +400,14 @@ signal QSalidaEstado61: std_logic;
 signal QSalidaEstado62: std_logic;
 signal QSalidaEstado63: std_logic;
 signal QSalidaEstado64: std_logic;
+
+-------FF Extra tiempos
+signal QSalidaEstado65: std_logic;
+signal QSalidaEstado66: std_logic;
+signal QSalidaEstado67: std_logic;
+signal QSalidaEstado68: std_logic;
+
+
  begin
  -----------------------------------------Condiciones de transiccion---------------------------------------------------------------------------------
  jump_Mux_Opcode<=(opcodeC(0) and opcodeC(1) and opcodeC(2) and  opcodeC(3) and not opcodeC(4) and opcodeC(5) and  opcodeC(6));--1101111
@@ -404,37 +421,41 @@ signal QSalidaEstado64: std_logic;
 -------------circuito de arranque---------------------
 
   --------------------------------------------------------  
- DEntradaEstado1<= QSalidaEstado28 or QSalidaEstado32;
-DEntradaEstado2<=QSalidaEstado1;
+DEntradaEstado1<= QSalidaEstado28 or QSalidaEstado32;
+DEntradaEstado2<= QSalidaEstado1;
 DEntradaEstado3<=QSalidaEstado2 or QSalidaEstado8;
 DEntradaEstado4<=QSalidaEstado3;
+--Agregar Tiempos--
 DEntradaEstado61<=QSalidaEstado4 ;
 DEntradaEstado62<=QSalidaEstado61 ;
 DEntradaEstado63<=QSalidaEstado62;
- DEntradaEstado64<=QSalidaEstado63;
+DEntradaEstado64<=QSalidaEstado63;
+DEntradaEstado5<=QSalidaEstado64 ;
+---------------------------------------
   
-  DEntradaEstado5<=QSalidaEstado64 ;
   DEntradaEstado6<=QSalidaEstado5;
   DEntradaEstado7<=(QSalidaEstado6 and jump_Mux_Opcode);
   DEntradaEstado8<=QSalidaEstado7;
   DEntradaEstado9<=(QSalidaEstado6  and not jump_Mux_Opcode);
   DEntradaEstado10<=QSalidaEstado9;
   
+  --Agregar Tiempos--
     DEntradaEstado51<=QSalidaEstado10;
 	 DEntradaEstado52<=QSalidaEstado51;
 	 DEntradaEstado53<=QSalidaEstado52;
 	 DEntradaEstado54<=QSalidaEstado53;
-	 
-  DEntradaEstado11<=QSalidaEstado54;
+    DEntradaEstado11<=QSalidaEstado54;
+  ---------------------------------------
   DEntradaEstado12<=QSalidaEstado11;
   DEntradaEstado13<=QSalidaEstado12;
   
-  DEntradaEstado47<=QSalidaEstado13;
+        --Agregar Tiempos--
+   DEntradaEstado47<=QSalidaEstado13;
    DEntradaEstado48<=QSalidaEstado47;
 	DEntradaEstado49<=QSalidaEstado48;
 	DEntradaEstado50<=QSalidaEstado49;
-
-  DEntradaEstado14<=QSalidaEstado50;
+   DEntradaEstado14<=QSalidaEstado50;
+  ------------------------------------
   DEntradaEstado15<=QSalidaEstado14;
   DEntradaEstado16<=QSalidaEstado15;
   DEntradaEstado17<=(QSalidaEstado16 and(R_Opcode or B_Opcode or S_Opcode)) ;
@@ -446,11 +467,13 @@ DEntradaEstado63<=QSalidaEstado62;
   DEntradaEstado23<=QSalidaEstado22;
   DEntradaEstado24<=QSalidaEstado23;
   DEntradaEstado25<=(QSalidaEstado20 and not S_Opcode) or (QsalidaEstado24 and not L_Opcode)  ;
-  
+  --Agregar Tiempos--
    DEntradaEstado57<=QSalidaEstado25;
 	DEntradaEstado58<=QSalidaEstado57;
-  
-  DEntradaEstado26<=QSalidaEstado58;
+  DEntradaEstado65<=QSalidaEstado58;
+  DEntradaEstado66<=QSalidaEstado65;
+  DEntradaEstado26<=QSalidaEstado66;
+  -------------------------------------
   DEntradaEstado27<=QSalidaEstado26 or( QSalidaEstado38 or QSalidaEstado40 or QSalidaEstado42 );
   DEntradaEstado28<=QSalidaEstado27;
   DEntradaEstado29<=QSalidaEstado18 and B_Opcode;
@@ -458,29 +481,35 @@ DEntradaEstado63<=QSalidaEstado62;
   DEntradaEstado31<=QSalidaEstado30;
   DEntradaEstado32<=QSalidaEstado31;
   ---------------------------------
+
   DEntradaEstado33<=QSalidaEstado24 and L_Opcode;
+    ----Agrega Tiempo----
   DEntradaEstado43<=QSalidaEstado33;
   DEntradaEstado44<=QSalidaEstado43;
   DEntradaEstado45<=QSalidaEstado44;
   DEntradaEstado46<=QSalidaEstado45;
-  
   DEntradaEstado34<=QSalidaEstado46;
+ -------------------------------------------- 
   DEntradaEstado35<=QSalidaEstado34 ;
   DEntradaEstado36<=QSalidaEstado35;
   DEntradaEstado37<=QSalidaEstado36;
-  
+    ----Agrega Tiempo----
    DEntradaEstado59<=QSalidaEstado37;
 	DEntradaEstado60<=QSalidaEstado59;
-  
-  DEntradaEstado38<=QSalidaEstado60;
+   DEntradaEstado67<=QSalidaEstado60;
+	DEntradaEstado68<=QSalidaEstado67;
+	DEntradaEstado38<=QSalidaEstado68;
+     --------------------------------------------
   DEntradaEstado39<=(QSalidaEstado20 and S_Opcode);
   DEntradaEstado40<=QSalidaEstado39;
   DEntradaEstado41<=QSalidaEstado16 and Sw_Opcode;
-  
+    ----Agrega Tiempo----
   DEntradaEstado55<=QSalidaEstado41;
   DEntradaEstado56<=QSalidaEstado55;
-  
   DEntradaEstado42<=QSalidaEstado56;
+--------------------------------------------
+  
+ ---------------------------------------------------------------------------------------------------------- 
 	
   Enable_PC_wire0<=QSalidaEstado1;
   Enable_PC_wire1<=QSalidaEstado2;
@@ -489,7 +518,7 @@ DEntradaEstado63<=QSalidaEstado62;
   Read_ROM_wire1<=QSalidaEstado4;
   Read_ROM_wire2<=QSalidaEstado5;
   Read_ROM_wire3<=QSalidaEstado6;
-   Read_ROM_wire4<=QSalidaEstado61;
+  Read_ROM_wire4<=QSalidaEstado61;
   Read_ROM_wire5<=QSalidaEstado62;
   Read_ROM_wire6<=QSalidaEstado63;
   Read_ROM_wire7<=QSalidaEstado64;
@@ -580,8 +609,11 @@ DEntradaEstado63<=QSalidaEstado62;
   
   WriteBR_wire0<=QSalidaEstado25;
   WriteBR_wire1<=QSalidaEstado26;
+  -------Extension1---------------
   WriteBR_wire2<=QSalidaEstado57;
   WriteBR_wire3<=QSalidaEstado58;
+  WriteBR_wire4<=QSalidaEstado65;
+  WriteBR_wire5<=QSalidaEstado66;
   
    Enable_DireccionCP_wire2<=QsalidaEstado27;
 	Enable_DireccionCP_wire3<=QSalidaEstado28;
@@ -625,22 +657,25 @@ Read_MD_wire7<=QSalidaEstado46;
 Enable_Data_Reg_wire0<=QSalidaEstado35;
 Enable_Data_Reg_wire1<=QSalidaEstado36; 
 
-WriteBR_wire4<=QSalidaEstado37;
-WriteBR_wire5<=QSalidaEstado38;
-WriteBR_wire6<=QSalidaEstado59;
-WriteBR_wire7<=QSalidaEstado60;
-
+WriteBR_wire6<=QSalidaEstado37;
+WriteBR_wire7<=QSalidaEstado38;
+---extension
+WriteBR_wire8<=QSalidaEstado67;
+WriteBR_wire9<=QSalidaEstado68;
+WriteBR_wire10<=QSalidaEstado59;
+WriteBR_wire11<=QSalidaEstado60;
+-------------------------------
 amMux_wire0<=QSalidaEstado37;
 amMux_wire1<=QSalidaEstado38;
-amMux_wire2<=QSalidaEstado59;
-amMux_wire3<=QSalidaEstado60;
+amMux_wire2<=QSalidaEstado39;
+amMux_wire3<=QSalidaEstado40;
 
   Write_MD_wire0<=QSalidaEstado39;
   Write_MD_wire1<=QSalidaEstado40; 
   
   Select_Data_Mux_wire0<=QSalidaEstado41;
   Select_Data_Mux_wire1<=QSalidaEstado42;
-   Select_Data_Mux_wire2<=QSalidaEstado55;
+  Select_Data_Mux_wire2<=QSalidaEstado55;
   Select_Data_Mux_wire3<=QSalidaEstado56;
   
   Write_MD_wire2<=QSalidaEstado41;
@@ -651,119 +686,109 @@ amMux_wire3<=QSalidaEstado60;
  process(clk,clear)
  
  begin
-  if(clear='1')then
-  QSalidaEstado1<='1';
-  QSalidaEstado2<='0';
-  QSalidaEstado3<='0';
+  if(clear='1' and rising_edge(clk))then
+      QSalidaEstado1<='1';
+      QSalidaEstado2<='0';
+      QSalidaEstado3<='0';
 --Estado4--
-  QSalidaEstado4<='0';
+      QSalidaEstado4<='0';
 --Estado5--
-  QSalidaEstado5<='0';
+      QSalidaEstado5<='0';
   --Estado6--
-  QSalidaEstado6<='0';
+      QSalidaEstado6<='0';
 --Estado7--
-  QSalidaEstado7<='0';
+      QSalidaEstado7<='0';
 --Estado8--
-  QSalidaEstado8<='0';
+      QSalidaEstado8<='0';
   --Estado9--
-  QSalidaEstado9<='0';
+     QSalidaEstado9<='0';
 --Estado10--
-  QSalidaEstado10<='0';
+     QSalidaEstado10<='0';
  --Estado11--
-  QSalidaEstado11<='0';
+     QSalidaEstado11<='0';
  --Estado12--
-  QSalidaEstado12<='0';
+     QSalidaEstado12<='0';
   --Estado13--
-  QSalidaEstado13<='0';
+    QSalidaEstado13<='0';
  --Estado14--
-  QSalidaEstado14<='0';
+     QSalidaEstado14<='0';
 --Estado15--
-  QSalidaEstado15<='0';
+     QSalidaEstado15<='0';
  --Estado16--
-  QSalidaEstado16<='0';
+     QSalidaEstado16<='0';
   --Estado17--
-  QSalidaEstado17<='0';
+     QSalidaEstado17<='0';
 --Estado18--
-  QSalidaEstado18<='0';
+     QSalidaEstado18<='0';
  --Estado19--
-  QSalidaEstado19<='0';
+     QSalidaEstado19<='0';
 --Estado20--
-  QSalidaEstado20<='0';
+     QSalidaEstado20<='0';
  --Estado21--
-  QSalidaEstado21<='0';
+     QSalidaEstado21<='0';
   --Estado22--
-  QSalidaEstado22<='0';
+     QSalidaEstado22<='0';
 --Estado23--
-  QSalidaEstado23<='0';
+    QSalidaEstado23<='0';
 --Estado24--
-  QSalidaEstado24<='0';
+    QSalidaEstado24<='0';
  --Estado25--
-  QSalidaEstado25<='0';
+   QSalidaEstado25<='0';
   --Estado26--
-  QSalidaEstado26<='0';
+   QSalidaEstado26<='0';
 --Estado27--
-  QSalidaEstado27<='0';
+   QSalidaEstado27<='0';
 --Estado28--
-  QSalidaEstado28<='0';
+   QSalidaEstado28<='0';
 --Estado29--
-  QSalidaEstado29<='0';
+   QSalidaEstado29<='0';
 --Estado30--
-  QSalidaEstado30<='0';
+   QSalidaEstado30<='0';
   --Estado31--
-  QSalidaEstado31<='0';
+   QSalidaEstado31<='0';
 --Estado32--
-  QSalidaEstado32<='0';
---Estado33--
-  QSalidaEstado33<='0';
---Estado34--
-  QSalidaEstado34<='0';
-  --Estado35--
-  QSalidaEstado35<='0';
-  --Estado35--
-  QSalidaEstado36<='0';
---Estado37--
-  QSalidaEstado37<='0';
-  --Estado38--
-  QSalidaEstado38<='0';
- --Estado39--
-  QSalidaEstado39<='0';
- --Estado40--
-  QSalidaEstado40<='0';
---Estado41--
-  QSalidaEstado41<='0';
- --Estado42--
-  QSalidaEstado42<='0';
-  QSalidaEstado43<='0';
-QSalidaEstado44<='0';
-QSalidaEstado45<='0';
- QSalidaEstado46<='0';
- 
-  QSalidaEstado47<='0';
-  QSalidaEstado48<='0';
-QSalidaEstado49<='0';
-QSalidaEstado50<='0';
-
-  QSalidaEstado51<='0';
-  QSalidaEstado52<='0';
-QSalidaEstado53<='0';
-QSalidaEstado54<='0';
-QSalidaEstado55<='0';
-QSalidaEstado56<='0';
-QSalidaEstado57<='0';
-QSalidaEstado58<='0';
+   QSalidaEstado32<='0';
+   QSalidaEstado33<='0';
+   QSalidaEstado34<='0';
+   QSalidaEstado35<='0';
+   QSalidaEstado36<='0';
+   QSalidaEstado37<='0';
+   QSalidaEstado38<='0';
+   QSalidaEstado39<='0';
+   QSalidaEstado40<='0';
+   QSalidaEstado41<='0';
+   QSalidaEstado42<='0';
+   QSalidaEstado43<='0';
+   QSalidaEstado44<='0';
+   QSalidaEstado45<='0';
+   QSalidaEstado46<='0'; 
+   QSalidaEstado47<='0';
+   QSalidaEstado48<='0';
+   QSalidaEstado49<='0';
+   QSalidaEstado50<='0';
+   QSalidaEstado51<='0';
+   QSalidaEstado52<='0';
+   QSalidaEstado53<='0';
+   QSalidaEstado54<='0';
+   QSalidaEstado55<='0';
+   QSalidaEstado56<='0';
+   QSalidaEstado57<='0';
+   QSalidaEstado58<='0';
 	QSalidaEstado59<='0';
-QSalidaEstado60<='0';
-
-QSalidaEstado61<='0';
-QSalidaEstado62<='0';
+   QSalidaEstado60<='0';
+   QSalidaEstado61<='0';
+   QSalidaEstado62<='0';
 	QSalidaEstado63<='0';
-QSalidaEstado64<='0';
-	
-	
+   QSalidaEstado64<='0';
+   QSalidaEstado65<='0';
+   QSalidaEstado66<='0';
+	QSalidaEstado67<='0';
+   QSalidaEstado68<='0';
 	
 
  ELSE if(rising_edge(clk))then--Estado0--
 
+ 
   QSalidaEstado1<=DEntradaEstado1;
   QSalidaEstado2<=DEntradaEstado2;
   QSalidaEstado3<=DEntradaEstado3;
@@ -870,12 +895,16 @@ QSalidaEstado64<='0';
   QSalidaEstado62<=DEntradaEstado62;
    QSalidaEstado63<=DEntradaEstado63;
   QSalidaEstado64<=DEntradaEstado64;
+   QSalidaEstado65<=DEntradaEstado65;
+  QSalidaEstado66<=DEntradaEstado66;
+   QSalidaEstado67<=DEntradaEstado67;
+  QSalidaEstado68<=DEntradaEstado68;
   END IF ;
    END IF ;
   end process;
- auxiliar<=Read_rs1_wire0 or Read_rs1_wire1 or Read_rs1_wire2 or Read_rs1_wire3 or Read_rs1_wire4 or Read_rs1_wire5 or Read_rs1_wire6 or Read_rs1_wire7;
- auxiliar2<=iRMux_wire0 or iRMux_wire1 or iRMux_wire2 or iRMux_wire3 or iRMux_wire4 or iRMux_wire5 or iRMux_wire6 or iRMux_wire7;
- auxiliar3<=WriteBR_wire0 or WriteBR_wire1 or WriteBR_wire2 or WriteBR_wire3 or WriteBR_wire4 or WriteBR_wire5 or WriteBR_wire6 or WriteBR_wire7;
+ --auxiliar<=Read_rs1_wire0 or Read_rs1_wire1 or Read_rs1_wire2 or Read_rs1_wire3 or Read_rs1_wire4 or Read_rs1_wire5 or Read_rs1_wire6 or Read_rs1_wire7;
+ --auxiliar2<=iRMux_wire0 or iRMux_wire1 or iRMux_wire2 or iRMux_wire3 or iRMux_wire4 or iRMux_wire5 or iRMux_wire6 or iRMux_wire7;
+ --auxiliar3<=WriteBR_wire0 or WriteBR_wire1 or WriteBR_wire2 or WriteBR_wire3 or WriteBR_wire4 or WriteBR_wire5 or WriteBR_wire6 or WriteBR_wire7 or WriteBR_wire8 or WriteBR_wire9 or WriteBR_wire10 or WriteBR_wire11;
 
   ------------------------SALIDA DE CONTROL----------------------------------------
  Read_ROM<=Read_ROM_wire0 or Read_ROM_wire1 or Read_ROM_wire2 or Read_ROM_wire3 OR Read_ROM_wire4 or Read_ROM_wire5 or Read_ROM_wire6 or Read_ROM_wire7;
@@ -886,14 +915,14 @@ QSalidaEstado64<='0';
  Read_rs1<=Read_rs1_wire0 or Read_rs1_wire1 or Read_rs1_wire2 or Read_rs1_wire3 or Read_rs1_wire4 or Read_rs1_wire5 or Read_rs1_wire6 or Read_rs1_wire7;
  Exce_Sum_con<=Exce_Sum_con_wire0 or Exce_Sum_con_wire1 or Exce_Sum_con_wire2 or Exce_Sum_con_wire3 or Exce_Sum_con_wire4 or Exce_Sum_con_wire5 or Exce_Sum_con_wire6 or Exce_Sum_con_wire7 or Exce_Sum_con_wire8 or Exce_Sum_con_wire9 or Exce_Sum_con_wire10 or Exce_Sum_con_wire11;
  EnableBR_OUT1<=(EnableBR_OUT1_wire0 or EnableBR_OUT1_wire1) ;
- Read_rs2<=(Read_rs2_wire0 or Read_rs2_wire1 or Read_rs2_wire2 or Read_rs2_wire3 or Read_rs2_wire4 or Read_rs2_wire5 or Read_rs2_wire6 or Read_rs2_wire7) and not auxiliar;
+ Read_rs2<=(Read_rs2_wire0 or Read_rs2_wire1 or Read_rs2_wire2 or Read_rs2_wire3 or Read_rs2_wire4 or Read_rs2_wire5 or Read_rs2_wire6 or Read_rs2_wire7) ;--and not auxiliar;
  EnableBR_OUT2<=EnableBR_OUT2_wire0 or EnableBR_OUT2_wire1;
  iRMux<=(iRMux_wire0 or iRMux_wire1 or iRMux_wire2 or iRMux_wire3 or iRMux_wire4 or iRMux_wire5 or iRMux_wire6 or iRMux_wire7) ;
- Exce_ALU<=(((Exce_ALU_wire0 or Exce_ALU_wire1 or Exce_ALU_wire2 or Exce_ALU_wire3 or Exce_ALU_wire4 or Exce_ALU_wire5 or Exce_ALU_wire6 or Exce_ALU_wire7 or Exce_ALU_wire8 or Exce_ALU_wire9 or Exce_ALU_wire10 or Exce_ALU_wire11 or Exce_ALU_wire12 or Exce_ALU_wire13 or Exce_ALU_wire14 or Exce_ALU_wire15) or auxiliar2) and not auxiliar3);
+ Exce_ALU<=Exce_ALU_wire0 or Exce_ALU_wire1 or Exce_ALU_wire2 or Exce_ALU_wire3 or Exce_ALU_wire4 or Exce_ALU_wire5 or Exce_ALU_wire6 or Exce_ALU_wire7 or Exce_ALU_wire8 or Exce_ALU_wire9 or Exce_ALU_wire10 or Exce_ALU_wire11 or Exce_ALU_wire12 or Exce_ALU_wire13 or Exce_ALU_wire14 or Exce_ALU_wire15;--) or auxiliar2) and not auxiliar3);
  Enable_ALU_OUT<=Enable_ALU_OUT_wire0 or Enable_ALU_OUT_wire1 or Enable_ALU_OUT_wire2 or Enable_ALU_OUT_wire3;
  iMux<=iMux_wire0 or iMux_wire1 or iMux_wire2 or iMux_wire3  or iMux_wire8 or iMux_wire9 ;
  amMux<=amMux_wire0 or amMux_wire1 or amMux_wire2 or amMux_wire3;
- WriteBR<=WriteBR_wire0 or WriteBR_wire1 or WriteBR_wire2 or WriteBR_wire3 or WriteBR_wire4 or WriteBR_wire5 or WriteBR_wire6 or WriteBR_wire7;
+ WriteBR<=WriteBR_wire0 or WriteBR_wire1 or WriteBR_wire2 or WriteBR_wire3 or WriteBR_wire4 or WriteBR_wire5 or WriteBR_wire6 or WriteBR_wire7 or WriteBR_wire8 or WriteBR_wire9 or WriteBR_wire10 or WriteBR_wire11;
  Write_MD<=Write_MD_wire0 or Write_MD_wire1 or Write_MD_wire2 or Write_MD_wire3 or Write_MD_wire4 or Write_MD_wire5;
  Read_MD<=Read_MD_wire0 or Read_MD_wire1 or Read_MD_wire2 or Read_MD_wire3 or Read_MD_wire4 or Read_MD_wire5 or Read_MD_wire6 or Read_MD_wire7 ;
  Enable_Data_Reg<=Enable_Data_Reg_wire0 or Enable_Data_Reg_wire1;

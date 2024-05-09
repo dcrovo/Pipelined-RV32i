@@ -30,7 +30,7 @@ architecture PC_RegArch of PC_Reg is
 
  process(clk,reset,Enable_PC_Reg)
  begin
- if(reset='1')then
+ if(reset='1' and rising_edge(clk))then
 Q_Salida_PC_Reg(0)<='0';
 Q_Salida_PC_Reg(1)<='0';
 Q_Salida_PC_Reg(2)<='0';

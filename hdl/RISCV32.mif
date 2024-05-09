@@ -1,3 +1,19 @@
+-- Copyright (C) 2018  Intel Corporation. All rights reserved.
+-- Your use of Intel Corporation's design tools, logic functions 
+-- and other software and tools, and its AMPP partner logic 
+-- functions, and any output files from any of the foregoing 
+-- (including device programming or simulation files), and any 
+-- associated documentation or information are expressly subject 
+-- to the terms and conditions of the Intel Program License 
+-- Subscription Agreement, the Intel Quartus Prime License Agreement,
+-- the Intel FPGA IP License Agreement, or other applicable license
+-- agreement, including, without limitation, that your use is for
+-- the sole purpose of programming logic devices manufactured by
+-- Intel and sold by Intel or its authorized distributors.  Please
+-- refer to the applicable agreement for further details.
+
+-- Quartus Prime generated Memory Initialization File (.mif)
+
 WIDTH=32;
 DEPTH=32768;
 
@@ -5,25 +21,15 @@ ADDRESS_RADIX=UNS;
 DATA_RADIX=BIN;
 
 CONTENT BEGIN
-	0      :   00000000000100000000011110010011;
-	1      :   00001111111100000000011100010011;
-	2      :   11110001110100000000011010010011;
-	3      :   00000000000000000000000100000011;
-	4      :   00000001100100010000000110010011;
-	5      :   00000000111000011101001001100011;
-	6      :   01111000111100000000001000010011;
-	7      :   00000000001100000000000001111111;
-	8      :   00000000111000000001000111100011;
-	9      :   01111000111100000000001000010011;
-	10     :   00000000111000000000000001111111;
-	11     :   00000000111000000001000111100011;
-	12     :   00000000010001110000001000110011;
-	13     :   00000000111000000000000001111111;
-	14     :   00000000000101111000000010110011;
-	15     :   00000000000000001000000100000011;
-	16     :   00000001100100010000000110010011;
-	17     :   11111110111000011101110111100011;
-	18     :   00000000010001111000001000110011;
-	19     :   00000000111000000000000001111111;
-	[20..32767]  :   00000000000000000000000000000000;
+	0      :   00000000000000000000111110010011;
+	1      :   00000000000100000000111100010011;
+	2      :   00000000100000000000111010010011;
+	3      :   00000000100000000000111000010011;
+	4      :   00000000100000000000110110010011;
+	5      :   00000000100000000000110100010011;
+	6      :   00000000100000000000110010010011;
+	7      :   00000000100000000000110000010011;
+	8      :   00000000000100000000101110010011;
+	9      :   00000000000011111000101100000011;
+	[10..32767]  :   00000000000000000000000000000000;
 END;

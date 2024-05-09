@@ -8,6 +8,8 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.numeric_std.all;
 use IEEE.std_logic_unsigned.all;
+LIBRARY altera_mf;
+USE altera_mf.all;
 
 --En esta seccion se colocan las senales de entrada y salidas basandonos en el diagrama en bloques.
 entity BancoDeRegistros is

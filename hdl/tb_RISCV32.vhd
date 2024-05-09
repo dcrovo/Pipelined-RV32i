@@ -13,8 +13,10 @@ architecture tb of tb_RISCV32 is
     component RISCV32
         port (
 		  	Direccion_CP :  out std_logic_vector(14 DOWNTO 0);
+			ROM : out std_logic_vector(31 DOWNTO 0);
 		   DirecionRAM:out std_logic_vector(14 DOWNTO 0);
 			SalidaBancoDeRegistros: out std_logic_vector( 31 DOWNTO 0);
+			RAM : out std_logic_vector(31 DOWNTO 0);
 		   enablers1: out std_logic;--0
 			enablers2: out std_logic;--1
 			readrs1: out std_logic;--2
@@ -38,6 +40,7 @@ architecture tb of tb_RISCV32 is
 			clkOUT  : out std_logic;--CLK
 			clkOUT2 : out std_logic;--CLK
 			clkOUT3 : out std_logic;--CLK
+			writeRAM : out std_logic;--CLK
 			----------------------------------------------------
 			clk : in std_logic
 		 
@@ -71,6 +74,9 @@ architecture tb of tb_RISCV32 is
 		signal	ReadRam:  std_logic;--13
 		signal	EnableInst: std_logic;--14
 		signal	ReadROM :  std_logic;--15
+		signal	WriteRAM :  std_logic;--15
+		signal ROM :  std_logic_vector(31 DOWNTO 0);
+		signal RAM :  std_logic_vector(31 DOWNTO 0);
 			
 
 	   signal   reset :  std_logic;--BOTON-CERO
@@ -94,8 +100,10 @@ begin
 	 
 	  
 	 Direccion_CP => Direccion_CP,
+	 ROM => ROM,
 	 DirecionRAM => DirecionRAM,
 	 SalidaBancoDeRegistros=> SalidaBancoDeRegistros,
+	 RAM => RAM,
 	 enablers1 => enablers1,
 	 enablers2 => enablers2,
 	 readrs1 => readrs1,
@@ -116,6 +124,7 @@ begin
 	 clkOUT  => clkOUT,
 	 clkOUT2 => clkOUT2,
     clkOUT3 => clkOUT3,
+	 writeRAM => writeRAM,
 	 clk => clk
 	
 	 );

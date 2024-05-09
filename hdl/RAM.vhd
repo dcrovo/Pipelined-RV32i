@@ -60,7 +60,7 @@ BEGIN
 	GENERIC MAP (
 		clock_enable_input_a => "BYPASS",
 		clock_enable_output_a => "BYPASS",
-		init_file => "redf22.mif",
+		init_file =>"C:\Users\dacp1\Documents\simulation\hdl\redf22.mif",
 		intended_device_family => "Stratix IV",
 		lpm_hint => "ENABLE_RUNTIME_MOD=NO",
 		lpm_type => "altsyncram",

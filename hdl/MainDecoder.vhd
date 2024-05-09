@@ -81,6 +81,12 @@ signal Select_jump_Mux_wire0 : std_logic;
 signal Select_jump_Mux_wire1 : std_logic;
 
 ----------------------------------------------------------
+-------FF Extra tiempos
+signal auxiliar: std_logic;
+signal auxiliar1: std_logic;
+signal auxiliar2: std_logic;
+signal auxiliar3: std_logic;
+
 -------------------Cables para EnableInst_Reg-------------
 signal Enable_DireccionCP_wire0 : std_logic;
 signal Enable_DireccionCP_wire1 : std_logic;
@@ -902,9 +908,9 @@ amMux_wire3<=QSalidaEstado40;
   END IF ;
    END IF ;
   end process;
- --auxiliar<=Read_rs1_wire0 or Read_rs1_wire1 or Read_rs1_wire2 or Read_rs1_wire3 or Read_rs1_wire4 or Read_rs1_wire5 or Read_rs1_wire6 or Read_rs1_wire7;
- --auxiliar2<=iRMux_wire0 or iRMux_wire1 or iRMux_wire2 or iRMux_wire3 or iRMux_wire4 or iRMux_wire5 or iRMux_wire6 or iRMux_wire7;
- --auxiliar3<=WriteBR_wire0 or WriteBR_wire1 or WriteBR_wire2 or WriteBR_wire3 or WriteBR_wire4 or WriteBR_wire5 or WriteBR_wire6 or WriteBR_wire7 or WriteBR_wire8 or WriteBR_wire9 or WriteBR_wire10 or WriteBR_wire11;
+ auxiliar<=Read_rs1_wire0 or Read_rs1_wire1 or Read_rs1_wire2 or Read_rs1_wire3 or Read_rs1_wire4 or Read_rs1_wire5 or Read_rs1_wire6 or Read_rs1_wire7;
+ auxiliar2<=iRMux_wire0 or iRMux_wire1 or iRMux_wire2 or iRMux_wire3 or iRMux_wire4 or iRMux_wire5 or iRMux_wire6 or iRMux_wire7;
+ auxiliar3<=WriteBR_wire0 or WriteBR_wire1 or WriteBR_wire2 or WriteBR_wire3 or WriteBR_wire4 or WriteBR_wire5 or WriteBR_wire6 or WriteBR_wire7 or WriteBR_wire8 or WriteBR_wire9 or WriteBR_wire10 or WriteBR_wire11;
 
   ------------------------SALIDA DE CONTROL----------------------------------------
  Read_ROM<=Read_ROM_wire0 or Read_ROM_wire1 or Read_ROM_wire2 or Read_ROM_wire3 OR Read_ROM_wire4 or Read_ROM_wire5 or Read_ROM_wire6 or Read_ROM_wire7;
@@ -915,10 +921,10 @@ amMux_wire3<=QSalidaEstado40;
  Read_rs1<=Read_rs1_wire0 or Read_rs1_wire1 or Read_rs1_wire2 or Read_rs1_wire3 or Read_rs1_wire4 or Read_rs1_wire5 or Read_rs1_wire6 or Read_rs1_wire7;
  Exce_Sum_con<=Exce_Sum_con_wire0 or Exce_Sum_con_wire1 or Exce_Sum_con_wire2 or Exce_Sum_con_wire3 or Exce_Sum_con_wire4 or Exce_Sum_con_wire5 or Exce_Sum_con_wire6 or Exce_Sum_con_wire7 or Exce_Sum_con_wire8 or Exce_Sum_con_wire9 or Exce_Sum_con_wire10 or Exce_Sum_con_wire11;
  EnableBR_OUT1<=(EnableBR_OUT1_wire0 or EnableBR_OUT1_wire1) ;
- Read_rs2<=(Read_rs2_wire0 or Read_rs2_wire1 or Read_rs2_wire2 or Read_rs2_wire3 or Read_rs2_wire4 or Read_rs2_wire5 or Read_rs2_wire6 or Read_rs2_wire7) ;--and not auxiliar;
+ Read_rs2<=(Read_rs2_wire0 or Read_rs2_wire1 or Read_rs2_wire2 or Read_rs2_wire3 or Read_rs2_wire4 or Read_rs2_wire5 or Read_rs2_wire6 or Read_rs2_wire7) and not auxiliar;
  EnableBR_OUT2<=EnableBR_OUT2_wire0 or EnableBR_OUT2_wire1;
  iRMux<=(iRMux_wire0 or iRMux_wire1 or iRMux_wire2 or iRMux_wire3 or iRMux_wire4 or iRMux_wire5 or iRMux_wire6 or iRMux_wire7) ;
- Exce_ALU<=Exce_ALU_wire0 or Exce_ALU_wire1 or Exce_ALU_wire2 or Exce_ALU_wire3 or Exce_ALU_wire4 or Exce_ALU_wire5 or Exce_ALU_wire6 or Exce_ALU_wire7 or Exce_ALU_wire8 or Exce_ALU_wire9 or Exce_ALU_wire10 or Exce_ALU_wire11 or Exce_ALU_wire12 or Exce_ALU_wire13 or Exce_ALU_wire14 or Exce_ALU_wire15;--) or auxiliar2) and not auxiliar3);
+ Exce_ALU<=(((Exce_ALU_wire0 or Exce_ALU_wire1 or Exce_ALU_wire2 or Exce_ALU_wire3 or Exce_ALU_wire4 or Exce_ALU_wire5 or Exce_ALU_wire6 or Exce_ALU_wire7 or Exce_ALU_wire8 or Exce_ALU_wire9 or Exce_ALU_wire10 or Exce_ALU_wire11 or Exce_ALU_wire12 or Exce_ALU_wire13 or Exce_ALU_wire14 or Exce_ALU_wire15) or auxiliar2) and not auxiliar3);
  Enable_ALU_OUT<=Enable_ALU_OUT_wire0 or Enable_ALU_OUT_wire1 or Enable_ALU_OUT_wire2 or Enable_ALU_OUT_wire3;
  iMux<=iMux_wire0 or iMux_wire1 or iMux_wire2 or iMux_wire3  or iMux_wire8 or iMux_wire9 ;
  amMux<=amMux_wire0 or amMux_wire1 or amMux_wire2 or amMux_wire3;

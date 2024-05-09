@@ -17,11 +17,11 @@ entity RISCV32 is
 		      
 				 Direccion_CP :  out std_logic_vector(14 DOWNTO 0);
 				 --Data_Mux : out std_logic_vector(31 DOWNTO 0);
-				 --ROM : out std_logic_vector(31 DOWNTO 0);
+				 ROM : out std_logic_vector(31 DOWNTO 0);
 				 DirecionRAM:out std_logic_vector(14 DOWNTO 0);
 				SalidaBancoDeRegistros: out std_logic_vector( 31 DOWNTO 0);
-				 --RAM :out std_logic_vector(31 DOWNTO 0);
-				 --salidacontador:  out std_logic_vector(14 DOWNTO 0);
+				 RAM :out std_logic_vector(31 DOWNTO 0);
+				 --salidacontador:  out std_logic_vector(14 DOWNTO 0);-
 				 --boton : out std_logic;
 				 --salidaicMuxs:  out std_logic_vector(14 DOWNTO 0);
 				 --salidaPCREG:  out std_logic_vector(14 DOWNTO 0);
@@ -51,6 +51,7 @@ entity RISCV32 is
 			clkOUT  : out std_logic;--CLK
 			clkOUT2 : out std_logic;--CLK
 			clkOUT3 : out std_logic;--CLK
+			writeRAM: out std_logic;
 			--pulseOUT: out std_logic;--PULse
 			--CLEAROUT: out std_logic;--CLEAR
 			
@@ -83,10 +84,11 @@ architecture RISCV32Arch of RISCV32 is
  begin
 Direccion_CP<=Salida_Registro_Direccion_CP ;
  --Data_Mux<=Salida_Data_Mux;
- --ROM<=Entrada_Registro_Inst;
- --AM<= Entrada_Registro_Data_Reg;
+ ROM<=Entrada_Registro_Inst;
+ RAM<= Entrada_Registro_Data_Reg;
  DirecionRAM<= Salida_Registro_ALU_OUT; 
  ReadROM<=Read_ROM; 
+ writeRAM <= Write_RAM;
  ------------------------
 --salidaicMuxs<=salidaicMux;
 --salidaPCREG<=pcreg;

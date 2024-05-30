@@ -1,0 +1,51 @@
+
+--PONTIFICIA_UNIVERSIDAD_JAVERIANA-- 
+--VHDL DE BANCO DE REGISTROS DE RVI32--
+--DISEÑADOR: DANIEL_FAJARDO--
+--6/10/2020--
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.numeric_std.all;
+use IEEE.std_logic_unsigned.all;
+LIBRARY altera_mf;
+USE altera_mf.all;
+
+--En esta seccion se colocan las senales de entrada y salidas basandonos en el diagrama en bloques.
+entity BancoDeRegistros is
+       port(
+            clk : in STD_LOGIC;
+            reset: in STD_LOGIC;
+            Direccion_rsd : in STD_LOGIC_VECTOR(4 downto 0);
+            Direccion_rs2 : in STD_LOGIC_VECTOR(4 downto 0);
+            Direccion_rs1 : in STD_LOGIC_VECTOR(4 downto 0);
+            Write_Br : in STD_LOGIC;
+            Read_rs1 : in STD_logic;
+            Read_rs2 : in STD_logic;
+            DataOut_rs1_rs2 : out std_logic_vector(31 downto 0);
+            Datain_BR : in STD_LOGIC_VECTOR(31 downto 0)
+       );
+end BancoDeRegistros;
+
+architecture Behavioral of BancoDeRegistros is 
+    type ram_type is array (31 downto 0) of std_logic_vector (31 downto 0);
+    signal myRam: ram_type;
+begin
+
+    process(clk, reset)
+    begin
+        if reset = '1' then
+            -- Inicializar DataOut_rs1_rs2 en caso de reset
+            DataOut_rs1_rs2 <= (others => '0');
+        elsif rising_edge(clk) then
+            if Write_Br = '1' then
+                myRam(conv_integer(Direccion_rsd)) <= Datain_BR;
+            elsif Read_rs1 = '1'  then
+                DataOut_rs1_rs2 <= myRam(conv_integer(Direccion_rs1));
+            elsif Read_rs2 = '1'  then
+                DataOut_rs1_rs2 <= myRam(conv_integer(Direccion_rs2));
+            end if;
+        end if;
+    end process;
+
+end Behavioral;

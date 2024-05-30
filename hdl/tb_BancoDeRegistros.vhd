@@ -93,7 +93,7 @@ begin
 		  Direccion_rsd     <= "00000";
 		  Write_Br   <= '1';
 		  Datain_BR <= "00000000000000000000000000110011";
-        wait for 120 ns ;
+        wait for 40 ns ;
 		  
 	     Write_Br   <= '0';
 		  wait for 140 ns ;
@@ -101,21 +101,21 @@ begin
 		  Direccion_rsd     <= "00001";
 		  Write_Br   <= '1';
 		  Datain_BR <= "00000000000000000000000000111011";
-        wait for 200 ns ;
+        wait for 40 ns ;
 		  
 		   Write_Br   <= '0';
 		  wait for 220 ns ;
 		  
 		  Direccion_rs1  <= "00000";
 		  Read_rs1   <= '1';
-		  wait for 300 ns ;
+		  wait for 80 ns ;
 		  
 		  Read_rs1   <= '0';
 		  wait for 320 ns ;
 		  
 		  Direccion_rs2  <= "00001";
 		  Read_rs2   <= '1';
-		  wait for 400 ns ;
+		  wait for 80 ns ;
 		
 		  wait;
         

@@ -56,7 +56,7 @@ BEGIN
 		address_aclr_a => "CLEAR0",
 		clock_enable_input_a => "BYPASS",
 		clock_enable_output_a => "BYPASS",
-		init_file => "RISCV32.mif",
+		init_file => "\Users\danie\iCloudDrive\Msc\hdl\RISCV32.mif",
 		intended_device_family => "Stratix IV",
 		lpm_type => "altsyncram",
 		numwords_a => 32768,

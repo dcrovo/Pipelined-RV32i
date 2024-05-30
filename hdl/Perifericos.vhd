@@ -22,7 +22,7 @@ entity Perifericos is
 				 RAM_Read_MD : in std_logic;
 				 RAM_Direccion : in std_logic_vector(14 DOWNTO 0);
 				 RAM_Salida : out std_logic_vector(31 DOWNTO 0);
-	          clear : in std_logic;
+	             clear : in std_logic;
 				 clk : in std_logic
 				 );
 				 

@@ -14,92 +14,146 @@ use ALTERA.altera_primitives_components.all;
 --En esta seccion se colocan las senales de entrada y salidas basandonos en el diagrama en bloques.
 entity RISCV32 is
        port( 
-		      
-				 Direccion_CP :  out std_logic_vector(14 DOWNTO 0);
-				 --Data_Mux : out std_logic_vector(31 DOWNTO 0);
-				 --ROM : out std_logic_vector(31 DOWNTO 0);
-				 DirecionRAM:out std_logic_vector(14 DOWNTO 0);
-				SalidaBancoDeRegistros: out std_logic_vector( 31 DOWNTO 0);
-				 --RAM :out std_logic_vector(31 DOWNTO 0);
-				 --salidacontador:  out std_logic_vector(14 DOWNTO 0);
-				 --boton : out std_logic;
-				 --salidaicMuxs:  out std_logic_vector(14 DOWNTO 0);
-				 --salidaPCREG:  out std_logic_vector(14 DOWNTO 0);
-				 --salidareset : out std_logic;
-             --BR : out std_logic_vector(31 DOWNTO 0);
-			--------------------SALIDAS DE CONTROL-----------
-		   enablers1: out std_logic;--0
-			enablers2: out std_logic;--1
-			readrs1: out std_logic;--2
-		   readrs2: out std_logic;--3
-			writebr: out std_logic;--4
-			ExceALU: out std_logic;--5
-			enableALUOUT: out std_logic;--6
-			EnablePC: out std_logic;--7
-			--SlectamMux: out std_logic;
-			SlectiMux: out std_logic;--8
-			SelectiRMux: out std_logic;--9
-			enabledireccioncp: out std_logic;--10
-			enabledata: out std_logic;--11
-			selectdatamux: out std_logic;--12
-			ReadRam: out std_logic;--13
-			EnableInst:out std_logic;--14
-			ReadROM : out std_logic;--15
-			
+	           ---------------------------------------
+		       -----Senales de salida de Control------
+			   ---------------------------------------
+			   clk : 					in std_logic;
+			   clear 					:in std_logic;
+			   Enable_PC : 			out std_logic;
+			   Exce_Sum_con : 		out std_logic;
+			   Enable_Sum_con : 		out std_logic;
+			   Enable_Direccion_CP :  out std_logic;
+			   Read_ROM :				out std_logic;
+			   EnableInst_Reg : 		out std_logic;
+			   EnableiMux_Reg         :out std_logic;
+			   Read_rs1 : 			out std_logic;
+			   EnableBR_OUT1 : 		out std_logic;
+			   Read_rs2 : 			out std_logic;
+			   EnableBR_OUT2 : 		out std_logic;
+			   Exce_ALU : 			out std_logic;
+			   Select_iRMux : 		out std_logic;
+			   Enable_ALU_OUT : 		out std_logic;
+			   Read_MD : 				out std_logic;
+			   Enable_Data_Reg: 		out std_logic;
+			   Branch_AND : 			out std_logic;
+			   Write_BR : 			out std_logic;
+			   Select_am_Mux : 		out std_logic;
+			   Select_iMux : 			out std_logic;
+			   Select_icMux : 		out std_logic;
+			   Select_jump_Mux: 		out std_logic;
+			   write_MD: 		        out std_logic;
+			   EnableInst_Reg_2 : 		        out std_logic;
+			   ------------------------	
+		  ------------------------	
+		   --------Mux Salidas-----
+		   ------------------------
+		   salidaData_Mux:  out  std_logic_vector(31 DOWNTO 0);
+		   salidaamMux:  out  std_logic_vector(31 DOWNTO 0);
+		   salidaiRMux:  out  std_logic_vector(31 DOWNTO 0);
+		   salidaiMux:   out  std_logic_vector(31 DOWNTO 0);
+		   salidaicMux:  out  std_logic_vector(14 DOWNTO 0);
+		  ---Registros de salida----
+		  DireccionCP_Reg : out std_logic_vector(14 DOWNTO 0);
+		  PC_Reg : out std_logic_vector(14 DOWNTO 0);
+		  sumcon_reg : out std_logic_vector(14 DOWNTO 0);
+		  Inst_reg : out std_logic_vector(31 DOWNTO 0);
+		  Inst_reg_2 : out std_logic_vector(6 DOWNTO 0);
+		  BR_OUT1 : out std_logic_vector(31 DOWNTO 0);
+		  BR_OUT2 : out std_logic_vector(31 DOWNTO 0);
+		  ALU_OUT : out std_logic_vector(31 DOWNTO 0);
+		  RAM_Direccion : out std_logic_vector(14 DOWNTO 0);
+		  Data_Reg : out std_logic_vector(31 DOWNTO 0);
+		  RAM_OUTPUT : out std_logic_vector(31 DOWNTO 0);
+		  ROM_OUTPUT : out std_logic_vector(31 DOWNTO 0)
 
-	      reset : in std_logic;--BOTON-CERO
-			clkOUT  : out std_logic;--CLK
-			clkOUT2 : out std_logic;--CLK
-			clkOUT3 : out std_logic;--CLK
-			--pulseOUT: out std_logic;--PULse
-			--CLEAROUT: out std_logic;--CLEAR
-			
-			
-			----------------------------------------------------
-				 clk : in std_logic
 				 );
 				 
 end RISCV32;
 
 architecture RISCV32Arch of RISCV32 is
 
-		 ------ROM----
-				signal Salida_Registro_Direccion_CP :  std_logic_vector(14 DOWNTO 0);
-				signal Entrada_Registro_Inst :  std_logic_vector(31 DOWNTO 0);
-				signal Read_ROM : std_logic;
-				 -----ROM-----
-				 
-				 signal Salida_Data_Mux : std_logic_vector(31 DOWNTO 0);
-				 signal Read_RAM : std_logic;
-				 signal Write_RAM : std_logic;
-				 signal Salida_Registro_ALU_OUT : std_logic_vector(14 DOWNTO 0);
-				 signal Entrada_Registro_Data_Reg : std_logic_vector(31 DOWNTO 0);
-             signal pulse : std_logic;
-				  signal clear : std_logic;
-				 --------prueba----
-				 --signal salidaicMux : std_logic_vector(14 DOWNTO 0);
-				 --signal pcreg : std_logic_vector(14 DOWNTO 0);
+	signal wire0  :  std_logic_vector(31 DOWNTO 0);
+	signal wire1  :  std_logic_vector(31 DOWNTO 0);
+	signal wire2  :  std_logic;
+	signal wire3  :  std_logic_vector(14 DOWNTO 0);
+	signal wire4  :  std_logic_vector(31 DOWNTO 0);
+	signal wire5  :  std_logic;
+	signal wire6  :  std_logic;
+	signal wire7  :  std_logic_vector(31 DOWNTO 0);	  
+        signal wire8  :  std_logic_vector(14 DOWNTO 0);  
 --------------------------------------------------------------------------
  begin
-Direccion_CP<=Salida_Registro_Direccion_CP ;
- --Data_Mux<=Salida_Data_Mux;
- --ROM<=Entrada_Registro_Inst;
- --AM<= Entrada_Registro_Data_Reg;
- DirecionRAM<= Salida_Registro_ALU_OUT; 
- ReadROM<=Read_ROM; 
- ------------------------
---salidaicMuxs<=salidaicMux;
---salidaPCREG<=pcreg;
-clkOUT<=not clk;
-clkOUT2<=not clk;
-clkOUT3<=not clk;
---pulse<= NOT start;
-clear<= not reset;
---clearOUT<=clear;
---boton<=start;
 
  -----------------------------Uniion de subsitemas internos del procesador con la arquitectura de mayor jerarquia---------------------------------------------------------------------------------
- UA : entity work.RV32I port map(clear,Salida_Registro_Direccion_CP,Entrada_Registro_Inst,Read_ROM,Salida_Data_Mux, Read_RAM , Write_RAM, Salida_Registro_ALU_OUT,Entrada_Registro_Data_Reg,enablers1,enablers2,readrs1,readrs2,writebr,ExceALU,enableALUOUT,EnablePC,	SlectiMux,SelectiRMux, enabledireccioncp,enabledata, selectdatamux,ReadRam, EnableInst,SalidaBancoDeRegistros,clk);
- UB : entity work.Perifericos port map(Read_ROM,Salida_Registro_Direccion_CP,Entrada_Registro_Inst,Salida_Data_Mux,Write_RAM,Read_RAM, Salida_Registro_ALU_OUT , Entrada_Registro_Data_Reg,clear,clk);
+ UA : entity work.RV32I port map(
+	
+ 		clk => clk, 
+		clear => clear, 					
+		Enable_PC => Enable_PC, 
+ 		Exce_Sum_con => Exce_Sum_con, 
+ 		Enable_Sum_con => Enable_Sum_con, 
+ 		Enable_Direccion_CP => Enable_Direccion_CP, 
+ 		Read_ROM => wire2, 
+ 		EnableInst_Reg => EnableInst_Reg, 
+		EnableiMux_Reg => EnableiMux_Reg,
+ 		Read_rs1 => Read_rs1,
+		EnableBR_OUT1=> EnableBR_OUT1 ,
+		Read_rs2 => Read_rs2 ,
+ 		EnableBR_OUT2=>  EnableBR_OUT2, 
+ 		Exce_ALU => Exce_ALU,
+		Select_iRMux => Select_iRMux , 
+		Enable_ALU_OUT => Enable_ALU_OUT, 
+ 		Read_MD  => wire6,
+ 		Enable_Data_Reg => Enable_Data_Reg ,
+ 		Branch_AND =>  Branch_AND,
+ 		Write_BR => Write_BR,
+ 		Select_am_Mux => Select_am_Mux, 
+		Select_iMux => Select_iMux,
+        Select_icMux => Select_icMux,
+		Select_jump_Mux => Select_jump_Mux,
+		write_MD => wire5,
+		EnableInst_Reg_2 => EnableInst_Reg_2,
+		------------------------
+		salidaData_Mux => wire4,	
+		salidaamMux => salidaamMux,
+		salidaiRMux => salidaiRMux,
+		salidaiMux => salidaiMux,
+		salidaicMux => salidaicMux,
+		DireccionCP_Reg => wire3,
+		PC_Reg  => PC_Reg,
+		sumcon_reg => sumcon_reg,
+		Inst_reg => Inst_reg,
+		Inst_reg_2  =>	 Inst_reg_2 ,
+		BR_OUT1 => BR_OUT1,
+		BR_OUT2 => BR_OUT2,
+		ALU_OUT => wire7,
+		Data_Reg => Data_Reg,
+		RAM_OUTPUT =>wire0,
+		ROM_OUTPUT =>wire1 
+	);
+	
+ UB : entity work.Perifericos port map(
 
+ 	Read_ROM => wire2,
+ 	ROM_Direccion => wire3,
+ 	ROM_Salida => wire1 ,
+ 	RAM_Datain => wire4,
+ 	RAM_Write_MD => wire5,
+ 	RAM_Read_MD =>wire6,
+ 	RAM_Direccion => wire7(14 downto 0),
+ 	RAM_Salida => wire0,
+ 	clear => clear,
+ 	clk   => clk
+ 
+ );
+
+ RAM_OUTPUT<=wire0;
+ ROM_OUTPUT<=wire1;
+ Read_ROM <= wire2;
+ DireccionCP_Reg <=wire3;
+ salidaData_Mux <= wire4;
+ write_MD <= wire5;
+ Read_MD <= wire6;
+ ALU_OUT <= wire7 ;
+ RAM_Direccion <=wire7(14 downto 0);
  end RISCV32Arch;

@@ -56,7 +56,11 @@ BEGIN
 		address_aclr_a => "CLEAR0",
 		clock_enable_input_a => "BYPASS",
 		clock_enable_output_a => "BYPASS",
+<<<<<<< HEAD:hdl/multi_cycle/ROM.vhd
 		init_file => "\Users\danie\iCloudDrive\Msc\hdl\RISCV32.mif",
+=======
+		init_file => "C:\Users\dacp1\Documents\simulation\hdl\RISCV32.mif",
+>>>>>>> origin/main:hdl/ROM.vhd
 		intended_device_family => "Stratix IV",
 		lpm_type => "altsyncram",
 		numwords_a => 32768,

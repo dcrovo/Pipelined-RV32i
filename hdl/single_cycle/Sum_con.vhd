@@ -7,33 +7,32 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.numeric_std.all;
 use IEEE.std_logic_unsigned.all;
-library ALTERA;
-use ALTERA.altera_primitives_components.all;
 -----
 --En esta seccion se colocan las senales de entrada y salidas basandonos en el diagrama en bloques.
 entity Sum_con is
        port( 
 				 Salida_Sum_con : out STD_LOGIC_VECTOR(14 downto 0);
 				 Salida_ic_Mux : in STD_LOGIC_VECTOR(14 downto 0);
-				 Exce_sum_con : in STD_LOGIC;
 				 Salida_PC_Reg : in STD_LOGIC_VECTOR(14 downto 0));
 end Sum_con;
 
-
+ 
 
 architecture Sum_conArch of Sum_con is
-signal AlmacenamientoX: std_logic_vector(14 downto 0);
-signal AlmacenamientoY: std_logic_vector(14 downto 0);
-signal Resultado: std_logic_vector(14 downto 0);
-signal AlmacIy: std_logic;
+signal AlmacenamientoX: std_logic_vector(14 downto 0) :=(others => '0');
+signal AlmacenamientoY: std_logic_vector(14 downto 0) := (others => '0');
+signal Resultado: std_logic_vector(14 downto 0) := (others => '0');
+signal AlmacIy: std_logic := '0';
+signal 	Exce_sum_con : STD_LOGIC := '0';
 
-signal CarryS0, CarryS1,CarryS2,CarryS3,CarryS4,CarryS5,CarryS6,CarryS7,CarryS8,CarryS9,CarryS10,CarryS11,CarryS12,CarryS13: std_logic;
+
+signal CarryS0, CarryS1,CarryS2,CarryS3,CarryS4,CarryS5,CarryS6,CarryS7,CarryS8,CarryS9,CarryS10,CarryS11,CarryS12,CarryS13: std_logic :='0';
 
 begin
 AlmacIy<='1';
 AlmacenamientoX<=Salida_PC_Reg;
 AlmacenamientoY<=Salida_ic_Mux;
-
+Exce_sum_con <= '1';
 ----------SUM-------
 Resultado(0) <= ((AlmacenamientoX(0) and (AlmacenamientoY(0)xnor not AlmacIy)) or (not AlmacenamientoX(0) and (AlmacenamientoY(0) xor not AlmacIy))); 
 CarryS0 <= (AlmacenamientoX(0) and (AlmacenamientoY(0)));  
@@ -85,12 +84,12 @@ Salida_Sum_con(1)<=Resultado(1) and Exce_sum_con;
 Salida_Sum_con(2)<=Resultado(2) and Exce_sum_con;
 Salida_Sum_con(3)<=Resultado(3) and Exce_sum_con;
 Salida_Sum_con(4)<=Resultado(4) and Exce_sum_con;
-Salida_Sum_con(5)<=Resultado(5) and Exce_sum_con;
+Salida_Sum_con(5)<=Resultado(5) and  Exce_sum_con;
 Salida_Sum_con(6)<=Resultado(6) and Exce_sum_con;
 Salida_Sum_con(7)<=Resultado(7) and Exce_sum_con;
 Salida_Sum_con(8)<=Resultado(8) and Exce_sum_con;
 Salida_Sum_con(9)<=Resultado(9) and Exce_sum_con;
-Salida_Sum_con(10)<=Resultado(10) and Exce_sum_con;
+Salida_Sum_con(10)<=Resultado(10)and Exce_sum_con;
 Salida_Sum_con(11)<=Resultado(11) and Exce_sum_con;
 Salida_Sum_con(12)<=Resultado(12) and Exce_sum_con;
 Salida_Sum_con(13)<=Resultado(13) and Exce_sum_con;
